@@ -33,7 +33,7 @@ class LED:
 def _convert_time_to_frame(time, tempo):
 	"""Convert a MIDI timestamp (in ticks) to a frame number."""
 	# frames = ticks / (ticks/beat) * (µsec/beat) / (sec/µsec) * (frames/sec)
-	return round(time / ticks_per_beat * current_tempo / 1_000_000 * FRAME_RATE)
+	return round(time / ticks_per_beat * tempo / 1_000_000 * FRAME_RATE)
 
 ####################################################################################################
 
@@ -81,8 +81,8 @@ for next_message in messages[1:]:
 		for led in led_string:
 			if led.pitch == message.note: led.set_intensity(velocity)
 	if message.time != next_message.time:  # done with this frame
-		frame_no = _convert_time_to_frame(message.time, tempo)
-		next_frame_no = _convert_time_to_frame(next_message.time, tempo)
+		frame_no = _convert_time_to_frame(message.time, current_tempo)
+		next_frame_no = _convert_time_to_frame(next_message.time, current_tempo)
 		for _ in range(frame_no, next_frame_no):
 			frame_list.append([led.rgb_value for led in led_string])
 	message = next_message
