@@ -1,5 +1,6 @@
 # MIDI-xmas-tree
-Generate animations for Matt Parker's Christmas tree from MIDI files.
+
+## Description of program
 
 The program reads in the 3D coordinates of the LEDs in the tree from a CSV file in GIFT format. It also reads in a song from a MIDI file.
 
@@ -9,6 +10,8 @@ With the LEDs thusly assigned to pitches, the animation is generated. For each n
 
 The animation is preceded by an 8-beat countdown sequence, which can be helpful if one wishes to cue the music at the same time the animation begins.
 
+## Parameters
+
 There are several adjustable parameters at the top of the program. All filepaths should be specified relative to the location of `xmaslights_MIDI.py`:
 
 * `COORDS_FILENAME` specifies the location of the CSV file containing the LED coordinates in GIFT format.
@@ -16,3 +19,10 @@ There are several adjustable parameters at the top of the program. All filepaths
 * `OUTPUT_FILENAME` specifies the location of the CSV file where the resulting animation data should be saved.
 * `OVERALL_BRIGHTNESS` can be set between 0 and 255 to control the LED intensity corresponding to a maximum-velocity (127) note in the MIDI file.
 * `FRAME_RATE` specifies the number of animation frames that will displayed on the tree per second. If this value does not match the frame rate used to play back the animation file on the tree, then the animation and the music will not be in sync.
+
+## Dependencies
+
+The code requires the `mido` library for interacting with MIDI libraries and the `scipy` library for some of the list manipulations. These can be installed like so:
+
+    pip install mido
+    pip install scipy
